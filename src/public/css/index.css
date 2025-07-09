@@ -23,7 +23,7 @@
 }
 
 .main__sidebar {
-    width: 30%;
+    width: 20%;
     margin-right: 10px;
     padding: 0 10px;
 }
@@ -63,22 +63,30 @@
 }
 
 .main__sidebar-sort-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 150px;
-    padding: 5px;
+    padding: 5px 10px;
+    margin-bottom: 15px;
     border: 1px solid #b39200;
     border-radius: 10px;
 }
 
 .main__sidebar-sort-icon {
-    width: 30px;
+    width: 20px;
+    height: 20px;
+    line-height: 15px;
+    font-size: 24px;
     border: 1px solid #b39200;
-    border-radius: 15px;
+    border-radius: 10px;
     color: #b39200;
+    text-align: center;
     rotate: 45deg;
 }
 
 .main__content {
-    width: 70%;
+    width: 80%;
 }
 
 .main__content-inner {
@@ -88,7 +96,7 @@
 }
 
 .main__content-item {
-    width: 32%;
+    width: 31%;
     background-color: #fff;
     margin-right: 20px;
     margin-bottom: 15px;

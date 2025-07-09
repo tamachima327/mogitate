@@ -40,9 +40,9 @@
                         </select>
                     </div>
                     @if($searches['sort'] == 'higher')
-                    <div class="main__sidebar-sort-list">高い順に表示<span class="main__sidebar-sort-icon" onclick="formSubmit('')">+</span></div>
+                    <div class="main__sidebar-sort-list"><span>高い順に表示</span><span class="main__sidebar-sort-icon" onclick="formSubmit('')">+</span></div>
                     @elseif($searches['sort'] == 'lower')
-                    <div class="main__sidebar-sort-list">低い順に表示<span class="main__sidebar-sort-icon" onclick="formSubmit('')">+</span></div>
+                    <div class="main__sidebar-sort-list"><span>低い順に表示</span><span class="main__sidebar-sort-icon" onclick="formSubmit('')">+</span></div>
                     @endif
                 </form>
                 <hr />
@@ -71,7 +71,7 @@
     <script>
         function formSubmit(sort) {
             const form = document.getElementById('search-form');
-            form.sort = sort;
+            form.sort.value = sort;
             form.submit();
         }
     </script>
