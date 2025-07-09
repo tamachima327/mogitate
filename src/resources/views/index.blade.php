@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/pagination.css')}}" />
 @endpush
 
 @section('title')
@@ -24,18 +25,26 @@
     <div class="main__page">
         <div class="main__sidebar">
             <div class="main__sidebar-inner">
-                <div class="main__sidebar-search">
-                    <div><input class="main__sidebar-search-input" type="text" name="search" placeholder="商品名で検索" /></div>
-                    <button class="main__sidebar-search-button" type="submit">検索</button>
-                </div>
-                <div class="main__sidebar-sort">
-                    <h3>価格順で表示</h3>
-                    <select name="sort" onchange="changeColor(this)">
-                        <option value="" style="display:none;" selected>価格で並び替え</option>
-                        <option value="higher">高い順に表示</option>
-                        <option value="lower">低い順に表示</option>
-                    </select>
-                </div>
+                <form id="search-form" method="POST" action="{{ route('search') }}">
+                    @csrf
+                    <div class="main__sidebar-search">
+                        <div><input class="main__sidebar-search-input" type="text" name="search" @if($searches['search'] != '') value="{{$searches['search']}}" @endif placeholder="商品名で検索" /></div>
+                        <input class="main__sidebar-search-button" type="submit" value="検索" />
+                    </div>
+                    <div class="main__sidebar-sort">
+                        <h3>価格順で表示</h3>
+                        <select name="sort" onchange="formSubmit(this.value)">
+                            <option value="" style="display:none;" @if($searches['sort'] == '') selected @endif>価格で並び替え</option>
+                            <option value="higher" @if($searches['sort'] == 'higher') selected @endif>高い順に表示</option>
+                            <option value="lower" @if($searches['sort'] == 'lower') selected @endif>低い順に表示</option>
+                        </select>
+                    </div>
+                    @if($searches['sort'] == 'higher')
+                    <div class="main__sidebar-sort-list">高い順に表示<span class="main__sidebar-sort-icon" onclick="formSubmit('')">+</span></div>
+                    @elseif($searches['sort'] == 'lower')
+                    <div class="main__sidebar-sort-list">低い順に表示<span class="main__sidebar-sort-icon" onclick="formSubmit('')">+</span></div>
+                    @endif
+                </form>
                 <hr />
             </div>
         </div>
@@ -54,18 +63,16 @@
                 @endforeach
             </div>
             <div class="main__content-pagination">
-                {{ $products->links() }}
+                {{ $products->links('vendor.pagination.default') }}
             </div>
         </div>
     </div>
 
     <script>
-        function changeColor(option){
-            if( option.value == '' ){
-                option.style.color = '#aaa';
-            }else{
-                option.style.color = '#000';
-            }
+        function formSubmit(sort) {
+            const form = document.getElementById('search-form');
+            form.sort = sort;
+            form.submit();
         }
     </script>
 @endsection

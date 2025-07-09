@@ -1,0 +1,18 @@
+.pagination li {
+    display: inline-block;
+    width: 25px;
+    list-style: none;
+    border-radius: 50px;
+    background-color: #fff;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.pagination li.active {
+    background-color: #f5c800;
+    color: #fff;
+}
+
+.pagination li a {
+    text-decoration: none;
+}

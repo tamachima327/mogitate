@@ -14,7 +14,7 @@
 <body>
     <header class="header">
         <div class="header__inner">
-            <h1 class="header__title">mogitate</h1>
+            <a href="{{ route('index') }}"><h1 class="header__title">mogitate</h1></a>
         </div>
     </header>
     <main class="main">
