@@ -82,6 +82,35 @@ class ProductController extends Controller
         return redirect()->back()->with('success', '更新が完了しました');
     }
 
+    public function register()
+    {
+        return view('register');
+    }
+
+    public function store(ProductRequest $request)
+    {
+        $seasons = $request->input('seasons');
+
+        $parameters = $request->only([
+            'name',
+            'price',
+            'description',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = $file->store('public/images');
+            $filename = basename($path);
+            $parameters['image'] = 'images/' . $filename;
+        }
+
+        $product = $this->product->create($parameters);
+
+        $product->seasons()->attach($seasons);
+
+        return redirect()->route('index')->with('success', '登録が完了しました');
+    }
+
     public function destroy(string $id)
     {
         $product = $this->product->find($id);

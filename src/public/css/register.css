@@ -1,0 +1,165 @@
+.main__page {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.input-title {
+    margin: 15px 0;
+}
+
+.required-box {
+    display: inline-block;
+    width: 50px;
+    background-color: red;
+    color: white;
+    margin: 0 10px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.red {
+    color: red;
+}
+
+.main__form-title {
+    padding-top: 30px;
+}
+
+.main__content input[type="text"],
+.main__content input[type="number"],
+.main__content textarea {
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #e0dfde;
+    border-radius: 5px;
+}
+
+.main__content textarea {
+    height: 150px;
+}
+
+.main__content input[type="checkbox"] {
+    width: 50px;
+    border-radius: 25px;
+}
+
+.main__content input[type="submit"] {
+    width: 200px;
+    height: 50px;
+    background-color: #f5c800;
+    border-radius: 5px;
+}
+
+.main__form-image-container {
+    margin-top: 20px;
+}
+
+.main__form-image {
+    display: none;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.main__form-input-container {
+    width: 50%;
+}
+
+.main__form-button-container {
+    margin-top: 10px;
+}
+
+.main__form-button-inner {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.main__form-button-container button {
+    width: 200px;
+    height: 50px;
+    background-color: #e0dfde;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.main__form-button-container button a {
+    display: block;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: black;
+    text-decoration: none;
+}
+
+/** Checkbox Design **/
+
+.custom-checkbox {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.custom-checkbox .checkmark {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #666;
+    background-color: #fff;
+    display: inline-block;
+    margin-right: 8px;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: #2e2e2e;
+    border-color: #2e2e2e;
+}
+
+.custom-checkbox .checkmark::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    opacity: 1;
+}
+
+/** slide message **/
+
+#slide-message {
+    position: fixed;
+    bottom: 20px;
+    right: -320px;
+    width: 300px;
+    padding: 15px 20px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    transition: right 0.5s ease;
+    z-index: 9999;
+}
+
+#slide-message.show {
+    right: 20px;
+}
