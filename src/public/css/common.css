@@ -31,3 +31,13 @@
     min-height: calc(100vh - 80px);
     margin: 0 auto;
 }
+
+.error-message {
+    color: red;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}

@@ -102,6 +102,11 @@
     margin-bottom: 15px;
 }
 
+.main__content-item a {
+    color: #000;
+    text-decoration: none;
+}
+
 .main__content-item:nth-child(3n) {
     margin-right: 0;
 }

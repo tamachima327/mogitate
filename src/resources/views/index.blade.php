@@ -6,7 +6,11 @@
 @endpush
 
 @section('title')
-    商品一覧
+    @if($searches['search'] != '')
+        "{{ $searches['search'] }}"の商品一覧
+    @else
+        商品一覧
+    @endif
 @endsection
 
 @section('content')
@@ -25,7 +29,7 @@
     <div class="main__page">
         <div class="main__sidebar">
             <div class="main__sidebar-inner">
-                <form id="search-form" method="POST" action="{{ route('search') }}">
+                <form id="search-form" method="GET" action="{{ route('search') }}">
                     @csrf
                     <div class="main__sidebar-search">
                         <div><input class="main__sidebar-search-input" type="text" name="search" @if($searches['search'] != '') value="{{$searches['search']}}" @endif placeholder="商品名で検索" /></div>
@@ -52,13 +56,15 @@
             <div class="main__content-inner">
                 @foreach ($products as $product)
                 <div class="main__content-item">
-                    <div class="main__content-item-inner">
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="商品画像" class="main__content-item-image">
-                        <div class="main__content-item-info">
-                            <span class="main__content-item-title">{{ $product->name }}</span>
-                            <p class="main__content-item-price">&yen;{{ $product->price }}</p>
+                    <a href="{{ route('show', ['productId' => $product->id]) }}">
+                        <div class="main__content-item-inner">
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="商品画像" class="main__content-item-image">
+                            <div class="main__content-item-info">
+                                <span class="main__content-item-title">{{ $product->name }}</span>
+                                <p class="main__content-item-price">&yen;{{ $product->price }}</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 @endforeach
             </div>

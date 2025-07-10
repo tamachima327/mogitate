@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchRequest;
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -33,7 +33,6 @@ class ProductController extends Controller
         ]);
 
         if (!empty($searches['search'])) {
-            Log::debug('aaa');
             $this->product = $this->product->where('name', 'like', '%' . $searches['search'] . '%');
         }
 
@@ -48,5 +47,47 @@ class ProductController extends Controller
         $products = $this->product->paginate(6);
 
         return view('index', compact('products', 'searches'));
+    }
+
+    public function show(string $id)
+    {
+        $product = $this->product->find($id);
+        return view('show', compact('product'));
+    }
+
+    public function update(ProductRequest $request, string $id)
+    {
+        $seasons = $request->input('seasons');
+
+        $parameters = $request->only([
+            'name',
+            'price',
+            'description',
+        ]);
+
+        $product = $this->product->find($id);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = $file->store('public/images');
+            $filename = basename($path);
+            $parameters['image'] = 'images/' . $filename;
+        }
+
+        $product->seasons()->sync($seasons);
+
+        $product->fill($parameters);
+        $product->save();
+
+        return redirect()->back()->with('success', '更新が完了しました');
+    }
+
+    public function destroy(string $id)
+    {
+        $product = $this->product->find($id);
+        $product->seasons()->detach();
+        $product->delete();
+
+        return redirect()->route('index');
     }
 }
