@@ -44,7 +44,7 @@ class ProductController extends Controller
             }
         }
 
-        $products = $this->product->paginate(6);
+        $products = $this->product->paginate(6)->appends($request->query());
 
         return view('index', compact('products', 'searches'));
     }
@@ -117,6 +117,6 @@ class ProductController extends Controller
         $product->seasons()->detach();
         $product->delete();
 
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success', '削除が完了しました');
     }
 }

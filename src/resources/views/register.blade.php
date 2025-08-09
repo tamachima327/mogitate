@@ -86,9 +86,6 @@
                 </form>
             </div>
         </div>
-        @if(session('success'))
-        <div id="slide-message">{{ session('success') }}</div>
-        @endif
     </div>
 
     <script>
@@ -106,18 +103,5 @@
                 reader.readAsDataURL(file);
             }
         });
-
-        @if(session('success'))
-        const msg = document.getElementById('slide-message');
-        setTimeout(() => {
-            msg.classList.add('show');
-        }, 100);
-        setTimeout(() => {
-        msg.classList.remove('show');
-        }, 5100);
-        setTimeout(() => {
-        msg.style.display = 'none';
-        }, 5600);
-        @endif
     </script>
 @endsection
